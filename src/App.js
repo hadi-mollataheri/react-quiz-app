@@ -1,3 +1,7 @@
+
+import Questions from './components/Questions';
+import Answers from './components/Answers';
+
 const questions = [
   {
     questionText: 'What is the capital of France?',
@@ -39,8 +43,10 @@ const questions = [
 
 function App() {
   return (
-    <div className='bg-red-500'>
-      <header className='text-green-300'>hi there</header>
+    <div id='container'>
+      <h1>Question <span id="question-number">*number*</span></h1>
+      <Questions />
+      <Answers />
     </div>
   );
 }
