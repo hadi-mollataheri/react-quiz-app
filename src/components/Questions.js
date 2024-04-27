@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Questions() {
+function Questions(props) {
     return (
         <div id='questions-container' className='mt-2'>
-            <p>I'm a question!???</p>
+            <p>{props.questionText}</p>
         </div>
     );
 }
