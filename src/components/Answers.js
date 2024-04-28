@@ -1,14 +1,14 @@
 import React from 'react';
 
 function Answers(props) {
-  const incrementQuestion = (prevQuestion) => {
+  const incrementQuestionIndex = (prevQuestion) => {
     return prevQuestion + 1;
   };
 
   const handleOptionOne = (e) => {
     if (props.answersArray[0].isCorrect === true) {
       props.setQuestionIndex((prevQuestionIndex) => {
-        return incrementQuestion(prevQuestionIndex);
+        return incrementQuestionIndex(prevQuestionIndex);
       });
     } else return;
   };
@@ -16,7 +16,7 @@ function Answers(props) {
   const handleOptionTwo = (e) => {
     if (props.answersArray[1].isCorrect === true) {
       props.setQuestionIndex((prevQuestionIndex) => {
-        return incrementQuestion(prevQuestionIndex);
+        return incrementQuestionIndex(prevQuestionIndex);
       });
     } else return;
   };
@@ -24,7 +24,7 @@ function Answers(props) {
   const handleOptionThree = (e) => {
     if (props.answersArray[2].isCorrect === true) {
       props.setQuestionIndex((prevQuestionIndex) => {
-        return incrementQuestion(prevQuestionIndex);
+        return incrementQuestionIndex(prevQuestionIndex);
       });
     } else return;
   };
@@ -32,7 +32,7 @@ function Answers(props) {
   const handleOptionFour = (e) => {
     if (props.answersArray[3].isCorrect === true) {
       props.setQuestionIndex((prevQuestionIndex) => {
-        return incrementQuestion(prevQuestionIndex);
+        return incrementQuestionIndex(prevQuestionIndex);
       });
     } else return;
   };
