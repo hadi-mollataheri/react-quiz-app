@@ -43,17 +43,17 @@ const questions = [
 ];
 
 function App() {
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [questionText, setQuestionText] = useState(questions[0].questionText);
   const [answersArray, setAnswersArray] = useState(questions[0].answerOptions);
 
   useEffect(() => {
-    setQuestionText(questions[questionIndex].questionText);
-  }, [questionIndex]);
+    setQuestionText(questions[currentIndex].questionText);
+  }, [currentIndex]);
 
   useEffect(() => {
-    setAnswersArray(questions[questionIndex].answerOptions);
-  }, [questionIndex]);
+    setAnswersArray(questions[currentIndex].answerOptions);
+  }, [currentIndex]);
 
   return (
     <div
@@ -68,7 +68,8 @@ function App() {
       </div>
       <Answers
         answersArray={answersArray}
-        setQuestionIndex={setQuestionIndex}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
       />
     </div>
   );

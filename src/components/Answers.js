@@ -1,25 +1,31 @@
 import React from 'react';
 
-function Answers(props) {
+function Answers({ answersArray, currentIndex, setCurrentIndex }) {
   const incrementQuestionIndex = (prevQuestion) => {
     return prevQuestion + 1;
   };
+
+  console.log(answersArray[currentIndex].isCorrect);
+
+  const handleAnswerClick = () => {
+    if (answersArray[currentIndex].isCorrect === true) {
+      setCurrentIndex((prevQuestionIndex) =>
+        incrementQuestionIndex(prevQuestionIndex)
+      );
+    }
+  };
+
+  console.log(currentIndex);
 
   return (
     <div
       id='answer-container'
       className='w-full flex flex-col justify-between text-start'
     >
-      {props.answersArray.map((answerObject, index) => {
+      {answersArray.map((answerObject, index) => {
         return (
           <button
-            onClick={() => {
-              if (answerObject.isCorrect === true) {
-                props.setQuestionIndex((prevQuestionIndex) => {
-                  return incrementQuestionIndex(prevQuestionIndex);
-                });
-              }
-            }}
+            onClick={handleAnswerClick}
             className='rounded-lg border-4 text-start pl-1  py-1'
             key={index}
           >
