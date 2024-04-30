@@ -58,7 +58,8 @@ function App() {
       >
         <div id='left-side-container' className='w-3/4'>
           <h1 className='font-bold text-lg'>
-            Question <span id='question-number'>*number*</span>
+            Question {`${currentQuestion + 1}`}
+            <span id='question-number' className=' font-normal text-base'>{`/${questions.length} `}</span>
           </h1>
           <Questions />
         </div>

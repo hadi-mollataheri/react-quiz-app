@@ -1,26 +1,21 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { QuizContext } from '../App';
 
 function Answers() {
-  const {questions, currentQuestion, setCurrentQuestion} = useContext(QuizContext);
+  const { questions, currentQuestion, setCurrentQuestion } =
+    useContext(QuizContext);
 
-const answersArray = questions[currentQuestion].answerOptions;
-  
+  const answersArray = questions[currentQuestion].answerOptions;
+
   const incrementQuestionIndex = (prevQuestion) => {
-    return prevQuestion + 1;
+    return prevQuestion === questions.length - 1
+      ? alert('You have reached the end of the quiz')
+      : prevQuestion + 1;
   };
-
-  // console.log(answersArray[currentIndex].isCorrect);
 
   const handleAnswerClick = () => {
-    if (answersArray[currentQuestion].isCorrect === true) {
-      setCurrentQuestion((prevQuestionIndex) =>
-        incrementQuestionIndex(prevQuestionIndex)
-      );
-    }
+    setCurrentQuestion((prevQuestion) => incrementQuestionIndex(prevQuestion));
   };
-
-  // console.log(currentIndex);
 
   return (
     <div
@@ -31,7 +26,7 @@ const answersArray = questions[currentQuestion].answerOptions;
         return (
           <button
             onClick={handleAnswerClick}
-            className='rounded-lg border-4 text-start pl-1  py-1'
+            className='rounded-lg border-4 text-start pl-1  py-1 border-sky-900'
             key={index}
           >
             {answerObject.answerText}
@@ -44,6 +39,5 @@ const answersArray = questions[currentQuestion].answerOptions;
 
 export default Answers;
 
-// TODO: I must use .map for creating buttons this way i can
-// manage the correct and wrong answer better too beside a cleaner
-// and more manageable code
+// TODO:
+// Create a condition that when our questions ends prevQuestion index wont be incremented
