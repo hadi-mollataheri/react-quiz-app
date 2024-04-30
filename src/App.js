@@ -48,16 +48,24 @@ export const QuizContext = createContext();
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [score, setScore] = useState(0);
+
   return (
     <QuizContext.Provider
-      value={{ questions, currentQuestion, setCurrentQuestion, setShowScore }}
+      value={{
+        questions,
+        currentQuestion,
+        setCurrentQuestion,
+        setShowScore,
+        setScore,
+      }}
     >
       {showScore ? (
         <div
           id='score-section'
           className='flex justify-center items-center mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl'
         >
-          <h2 className='font-bold text-lg'>{`Your score is: ${'***'}`}</h2>
+          <h2 className='font-bold text-lg'>{`Your score is: %${score}`}</h2>
         </div>
       ) : (
         <div
@@ -83,7 +91,3 @@ function App() {
 
 export default App;
 // TODOs:
-// I want to use question in Answers and Questions without importing it and the why is:
-// This way I can easily loop throw answer and make handler without passing to many props
-// and without creating hard to understand code.
-// So now I should use useContext for those reasons

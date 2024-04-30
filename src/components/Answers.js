@@ -2,8 +2,15 @@ import React, { useContext } from 'react';
 import { QuizContext } from '../App';
 
 function Answers() {
-  const { questions, currentQuestion, setCurrentQuestion, setShowScore } =
-    useContext(QuizContext);
+  const {
+    questions,
+    currentQuestion,
+    setCurrentQuestion,
+    setShowScore,
+    setScore,
+  } = useContext(QuizContext);
+
+  const eachQuestionScore = 100 / questions.length;
 
   const answersArray = questions[currentQuestion].answerOptions;
 
@@ -13,8 +20,17 @@ function Answers() {
       : prevQuestion + 1;
   };
 
-  const handleAnswerClick = () => {
-    setCurrentQuestion((prevQuestion) => incrementQuestionIndex(prevQuestion));
+  const handleScore = (isCorrect) => {
+    if (isCorrect === true) {
+      setScore((prevScore) => prevScore + eachQuestionScore);
+    }
+  };
+
+  const handleAnswerClick = (isCorrect) => {
+    handleScore(isCorrect);
+    setCurrentQuestion((prevQuestion) => {
+      return incrementQuestionIndex(prevQuestion);
+    });
   };
 
   return (
@@ -25,7 +41,7 @@ function Answers() {
       {answersArray.map((answerObject, index) => {
         return (
           <button
-            onClick={handleAnswerClick}
+            onClick={() => handleAnswerClick(answerObject.isCorrect)}
             className='rounded-lg border-4 text-start pl-1  py-1 border-sky-900'
             key={index}
           >
@@ -40,4 +56,3 @@ function Answers() {
 export default Answers;
 
 // TODO:
-// Create a condition that when our questions ends prevQuestion index wont be incremented
