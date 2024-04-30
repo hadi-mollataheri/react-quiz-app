@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 
 import Questions from './components/Questions';
 import Answers from './components/Answers';
@@ -43,37 +43,34 @@ const questions = [
 ];
 
 function App() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [questionText, setQuestionText] = useState(questions[0].questionText);
-  const [answersArray, setAnswersArray] = useState(questions[0].answerOptions);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  useEffect(() => {
-    setQuestionText(questions[currentIndex].questionText);
-  }, [currentIndex]);
-
-  useEffect(() => {
-    setAnswersArray(questions[currentIndex].answerOptions);
-  }, [currentIndex]);
+  // Create new context called quizContext
+  const QuizContext = createContext();
 
   return (
-    <div
-      id='app-container'
-      className='flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl bg-blue'
+    <QuizContext.Provider
+      value={{ questions, currentQuestion, setCurrentQuestion }}
     >
-      <div id='left-side-container' className='w-3/4'>
-        <h1 className='font-bold text-lg'>
-          Question <span id='question-number'>*number*</span>
-        </h1>
-        <Questions questionText={questionText} />
+      <div
+        id='app-container'
+        className='flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl bg-blue'
+      >
+        <div id='left-side-container' className='w-3/4'>
+          <h1 className='font-bold text-lg'>
+            Question <span id='question-number'>*number*</span>
+          </h1>
+          <Questions />
+        </div>
+        <Answers />
       </div>
-      <Answers
-        answersArray={answersArray}
-        currentIndex={currentIndex}
-        setCurrentIndex={setCurrentIndex}
-      />
-    </div>
+    </QuizContext.Provider>
   );
 }
 
 export default App;
 // TODOs:
+// I want to use question in Answers and Questions without importing it and the why is:
+// This way I can easily loop throw answer and make handler without passing to many props
+// and without creating hard to understand code.
+// So now I should use useContext for those reasons
