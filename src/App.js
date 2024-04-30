@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, createContext } from 'react';
 
 import Questions from './components/Questions';
 import Answers from './components/Answers';
@@ -42,11 +42,11 @@ const questions = [
   },
 ];
 
+// Create new context called quizContext
+export const QuizContext = createContext();
+
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
-  // Create new context called quizContext
-  const QuizContext = createContext();
 
   return (
     <QuizContext.Provider

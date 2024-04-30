@@ -1,21 +1,26 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { QuizContext } from '../App';
 
-function Answers({ answersArray, currentIndex, setCurrentIndex }) {
+function Answers() {
+  const {questions, currentQuestion, setCurrentQuestion} = useContext(QuizContext);
+
+const answersArray = questions[currentQuestion].answerOptions;
+  
   const incrementQuestionIndex = (prevQuestion) => {
     return prevQuestion + 1;
   };
 
-  console.log(answersArray[currentIndex].isCorrect);
+  // console.log(answersArray[currentIndex].isCorrect);
 
   const handleAnswerClick = () => {
-    if (answersArray[currentIndex].isCorrect === true) {
-      setCurrentIndex((prevQuestionIndex) =>
+    if (answersArray[currentQuestion].isCorrect === true) {
+      setCurrentQuestion((prevQuestionIndex) =>
         incrementQuestionIndex(prevQuestionIndex)
       );
     }
   };
 
-  console.log(currentIndex);
+  // console.log(currentIndex);
 
   return (
     <div
