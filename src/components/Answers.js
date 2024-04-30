@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { QuizContext } from '../App';
 
 function Answers() {
-  const { questions, currentQuestion, setCurrentQuestion } =
+  const { questions, currentQuestion, setCurrentQuestion, setShowScore } =
     useContext(QuizContext);
 
   const answersArray = questions[currentQuestion].answerOptions;
 
   const incrementQuestionIndex = (prevQuestion) => {
     return prevQuestion === questions.length - 1
-      ? alert('You have reached the end of the quiz')
+      ? setShowScore(true)
       : prevQuestion + 1;
   };
 

@@ -47,24 +47,36 @@ export const QuizContext = createContext();
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  const [showScore, setShowScore] = useState(false);
   return (
     <QuizContext.Provider
-      value={{ questions, currentQuestion, setCurrentQuestion }}
+      value={{ questions, currentQuestion, setCurrentQuestion, setShowScore }}
     >
-      <div
-        id='app-container'
-        className='flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl bg-blue'
-      >
-        <div id='left-side-container' className='w-3/4'>
-          <h1 className='font-bold text-lg'>
-            Question {`${currentQuestion + 1}`}
-            <span id='question-number' className=' font-normal text-base'>{`/${questions.length} `}</span>
-          </h1>
-          <Questions />
+      {showScore ? (
+        <div
+          id='score-section'
+          className='flex justify-center items-center mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl'
+        >
+          <h2 className='font-bold text-lg'>{`Your score is: ${'***'}`}</h2>
         </div>
-        <Answers />
-      </div>
+      ) : (
+        <div
+          id='app-container'
+          className='flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl'
+        >
+          <div id='left-side-container' className='w-3/4'>
+            <h1 className='font-bold text-lg'>
+              Question {`${currentQuestion + 1}`}
+              <span
+                id='question-number'
+                className=' font-normal text-base'
+              >{`/${questions.length} `}</span>
+            </h1>
+            <Questions />
+          </div>
+          <Answers />
+        </div>
+      )}
     </QuizContext.Provider>
   );
 }
