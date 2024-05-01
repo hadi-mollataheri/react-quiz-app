@@ -49,6 +49,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+  const [transitioning, setTransitioning] = useState(false)
 
   return (
     <QuizContext.Provider
@@ -58,6 +59,7 @@ function App() {
         setCurrentQuestion,
         setShowScore,
         setScore,
+        setTransitioning
       }}
     >
       {showScore ? (
@@ -70,7 +72,7 @@ function App() {
       ) : (
         <div
           id='app-container'
-          className='flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl'
+          className={`flex justify-evenly mt-28 bg-blue-950 my-0 mx-auto p-4 max-w-md min-h-52 text-white rounded-2xl shadow-2xl ${transitioning ? 'transition-opacity delay-100 opacity-0 ' : ''}`}
         >
           <div id='left-side-container' className='w-3/4'>
             <h1 className='font-bold text-lg'>

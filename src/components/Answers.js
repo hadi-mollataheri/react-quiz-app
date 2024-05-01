@@ -8,6 +8,7 @@ function Answers() {
     setCurrentQuestion,
     setShowScore,
     setScore,
+    setTransitioning,
   } = useContext(QuizContext);
 
   const eachQuestionScore = 100 / questions.length;
@@ -28,9 +29,13 @@ function Answers() {
 
   const handleAnswerClick = (isCorrect) => {
     handleScore(isCorrect);
-    setCurrentQuestion((prevQuestion) => {
-      return incrementQuestionIndex(prevQuestion);
-    });
+    setTransitioning(true);
+    setTimeout(() => {
+      setCurrentQuestion((prevQuestion) => {
+        return incrementQuestionIndex(prevQuestion);
+      });
+      setTransitioning(false);
+    }, 300);
   };
 
   return (
